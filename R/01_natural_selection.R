@@ -3,20 +3,22 @@
 #--------------------------------------#
 
 # 6-sided die
-
 dado <- sample(6,6)
-dado
 
-result <- as.data.frame(matrix(nrow = 100,
-                               ncol = 6))
+# Object to save the results
+result <- c()
 
-for (i in 1:1000) {
-  if(min(dado) != 6)
-  {
+# Running the evlution
+while (min(dado) != 6) {
+  if(min(dado) != 6) {
     dado[dado == min(dado)][1] = sample(6,1)
-    result[i,]=    dado
+    result <- rbind(result, dado)
   }
-  else
-  {c(0,0,0,0,0,0)}
 }
-na.omit(result)
+result <- as.data.frame(result)
+
+# View the results
+result
+
+# Number of steps
+nrow(result)
